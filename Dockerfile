@@ -1,4 +1,6 @@
-FROM scratch
+FROM lsiobase/alpine:3.11 as buildstage
+COPY root/ /root-layer/
 
-# copy local files
-COPY root/ /
+FROM scratch
+LABEL maintainer="Didstopia <support@didstopia.com>"
+COPY --from=buildstage /root-layer/ /
