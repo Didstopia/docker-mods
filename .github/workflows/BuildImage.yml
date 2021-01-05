@@ -19,7 +19,7 @@ jobs:
       - name: Tag image
         if: ${{ github.ref == env.BRANCH }}
         run: |
-          docker tag ${{ github.sha }} ${ENDPOINT}:latet
+          docker tag ${{ github.sha }} ${ENDPOINT}:latest
           docker tag ${{ github.sha }} ${ENDPOINT}:${{ github.sha }}
           docker tag ${{ github.sha }} ghcr.io/${ENDPOINT}:latest
           docker tag ${{ github.sha }} ghcr.io/${ENDPOINT}:${{ github.sha }}
