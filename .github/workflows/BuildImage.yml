@@ -4,7 +4,7 @@ on: [push, pull_request, workflow_dispatch]
 
 env:
   ENDPOINT: "didstopia/docker-mods"
-  BRANCH: "master"
+  BRANCH: "refs/heads/master"
 
 jobs:
   build:
