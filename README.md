@@ -2,4 +2,4 @@
 
 Docker Mods for linuxserver.io
 
-__NOTE: Work in progress!_
+__NOTE:__ _Work in progress!_
