@@ -1,5 +1,7 @@
-# Docker Mods
+# Build Tools - Docker mod for all images
 
-Docker Mods for linuxserver.io
+This mod adds common build tools to any linuxserver image. Images using Ubuntu will automatically update build tools on startup, but Alpine based images will not.
 
-__NOTE:__ _Work in progress!_
+In any container docker arguments, set an environment variable DOCKER_MODS=didstopia/mods:universal-buildtools
+
+If adding multiple mods, enter them in an array separated by `|`, such as `DOCKER_MODS=didstopia/mods:universal-buildtools|linuxserver/mods:universal-mod2`
