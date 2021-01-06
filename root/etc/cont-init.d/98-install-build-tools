@@ -1,9 +1,28 @@
 #!/usr/bin/with-contenv bash
 
-if [[ ! dpkg --get-selections | grep -q "^build-essential[[:space:]]*install$" >/dev/null ]] && \
-[ -f /usr/bin/apt ]; then
-  ## Ubuntu
-  apt-get update
-  apt-get install --no-install-recommends -y \
-    build-essential
+set -euf -o pipefail
+
+# Ubuntu
+if command -v apt-get &>/dev/null; then
+  if ! dpkg --get-selections | grep -q "^build-essential[[:space:]]*install$" >/dev/null; then
+    echo "**** Installing common build tools for Ubuntu ****"
+    apt-get update
+    apt-get install --no-install-recommends -y \
+      build-essential
+  elif apt-get -qq update; apt-get -qs upgrade | grep -q "build-essential" >/dev/null; then
+    echo "**** Updating common build tools for Ubuntu ****"
+    apt --only-upgrade install --no-install-recommends -y \
+      build-essential
+  else
+    echo "**** Build tools are up to date, skipping ****"
+  fi
+# Alpine
+elif command -v apk &> /dev/null; then
+  if ! apk info -e alpine-sdk >/dev/null; then
+    echo "**** Installing common build tools for Alpine ****"
+    apk add --no-cache \
+      alpine-sdk
+  else
+    echo "**** Build tools are up to date, skipping ****"
+  fi
 fi
